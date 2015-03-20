@@ -33,7 +33,7 @@ public class Aspect extends IdEntity {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "aspect", cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Notice.class)
+    @OneToMany(mappedBy = "aspect")
     // orphanRemoval = true,
     public Set<Notice> getNotices() {
         return notices;
@@ -43,7 +43,7 @@ public class Aspect extends IdEntity {
         this.notices = notices;
     }
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne()
     @JoinColumn(name = "bean_id")
     public Bean getRefBean() {
         return refBean;

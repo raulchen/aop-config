@@ -112,6 +112,10 @@
 			<property name="password" value="${jdbc.password}" />
 			<property name="defaultAutoCommit" value="false" />
 		</bean>
+		
+<!-- 		<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
+			<jdbc:script location="classpath:db.sql"  encoding="UTF-8"/>
+		</jdbc:initialize-database>  -->
 	</beans>
 
 	 <!-- unit test环境 -->

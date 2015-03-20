@@ -26,7 +26,7 @@ public class Notice extends IdEntity {
     private boolean state;
 
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne()
     @JoinColumn(name = "pointcut_id")
     public Pointcut getPointcut() {
         return pointcut;
@@ -36,8 +36,8 @@ public class Notice extends IdEntity {
         this.pointcut = pointcut;
     }
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "pointtype_id")
+//    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinColumn(name = "pointtype_id")
     public PointType getPointType() {
         return pointType;
     }

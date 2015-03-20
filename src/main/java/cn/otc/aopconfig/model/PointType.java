@@ -1,24 +1,28 @@
 package cn.otc.aopconfig.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "point_type")
-public class PointType extends IdEntity {
+public enum PointType {
 
-    private String name;
+	BEFORE("before"), AFTER("after"), AFTER_THROWING("after_throwing"), ATTER_RETURNING(
+			"after_returning"), AROUND("around");
 
-    public String getName() {
-        return name;
-    }
+	String name;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	PointType(String name){
+		this.name=name;
+	}
 
+	public String getName(){
+		return name;
+	}
+
+	public static PointType of(String name){
+		name=name.toLowerCase();
+		for(PointType pointType: PointType.values()){
+			if(pointType.getName().equals(name)){
+				return pointType;
+			}
+		}
+		return null;
+	}
 }

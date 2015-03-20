@@ -15,7 +15,6 @@ public class Bean extends IdEntity {
 
     private String name;
 
-
     public String getShortName() {
         return shortName;
     }
