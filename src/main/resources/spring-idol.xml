@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="http://www.springframework.org/schema/beans       http://www.springframework.org/schema/beans/spring-beans.xsd      http://www.springframework.org/schema/aop      http://www.springframework.org/schema/aop/spring-aop.xsd">  
+  <!--<start id="audience_aspect" /> -->  
+  <aop:config></aop:config>  
+  <bean id="c1" class="cn.otc.aopconfig.Class1"/>
+  <bean id="c2" class="cn.otc.aopconfig.Class2"/>
+  <bean id="c3" class="cn.otc.aopconfig.Class3"/>
+</beans>

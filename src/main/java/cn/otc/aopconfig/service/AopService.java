@@ -35,17 +35,17 @@ public class AopService {
 
     @PostConstruct
     private void init() {
-	for (int i = 1; i <= 3; i++) {
-	    Bean bean = new Bean();
-	    bean.setShortName("c" + i);
-	    bean.setName("cn.otc.aopconfig.Class" + i);
-	    bean = beanDao.save(bean);
-
-	    Aspect aspect = new Aspect();
-	    aspect.setRefBean(bean);
-	    aspect.setName("Aspect" + i);
-	    aspectDao.save(aspect);
-	}
+//	for (int i = 1; i <= 3; i++) {
+//	    Bean bean = new Bean();
+//	    bean.setShortName("c" + i);
+//	    bean.setName("cn.otc.aopconfig.Class" + i);
+//	    bean = beanDao.save(bean);
+//
+//	    Aspect aspect = new Aspect();
+//	    aspect.setRefBean(bean);
+//	    aspect.setName("Aspect" + i);
+//	    aspectDao.save(aspect);
+//	}
     }
 
     public List<Bean> getBeans() {
@@ -54,6 +54,31 @@ public class AopService {
 
     public void createNotice(String pointcut, Long beanId, String method,
 	    PointType pointType) {
+
+	String inputParameter = "";
+	if (pointcut.endsWith(")")) {
+	    int p = pointcut.lastIndexOf('(');
+	    if (p >= 0) {
+		String[] params = pointcut.substring(p + 1,
+			pointcut.length() - 1).split(",");
+		for (int i = 0; i < params.length; i++) {
+		    if (i > 0) {
+			inputParameter += ",";
+		    }
+		    String name = params[i].substring(params[i]
+			    .lastIndexOf(' ') + 1);
+		    inputParameter += name;
+		}
+		pointcut = "execution(* " + pointcut.substring(0, p) + "(..))";
+		if (inputParameter.isEmpty() == false) {
+		    pointcut += " and args(" + inputParameter + ")";
+		}
+	    }
+	}
+	else{
+	    pointcut = "execution(* " + pointcut + "(..))";
+	}
+
 	Notice notice = new Notice();
 	notice.setCreateTime(new Date());
 
@@ -64,6 +89,7 @@ public class AopService {
 	notice.setMethod(method);
 	notice.setPointcut(findOrCreatePointcut(pointcut));
 	notice.setPointType(pointType);
+	notice.setInputParameter(inputParameter);
 	notice.setState(true);
 
 	noticeDao.save(notice);
@@ -83,8 +109,14 @@ public class AopService {
 	}
 	return pointcut;
     }
-    
-    public void deleteNotice(Long id){
+
+    public void deleteNotice(Long id) {
 	noticeDao.delete(id);
+    }
+
+    public Notice update(Long id, boolean state) {
+	Notice notice = noticeDao.findOne(id);
+	notice.setState(state);
+	return noticeDao.save(notice);
     }
 }

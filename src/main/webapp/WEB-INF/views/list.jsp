@@ -14,16 +14,23 @@
 			<td>PointType</td>
 			<td>Bean</td>
 			<td>method</td>
-			<td>删除</td>
 		</tr>
 		<c:forEach items="${notices}" var="n">
 			<tr>
 				<td>${n.pointcut.expression }</td>
-				<td>${n.pointType }</td>
-				<td>${n.aspect.refBean.name }<td>
+				<td>${n.pointType.name }</td>
+				<td>${n.aspect.refBean.name }</td>
 				<td>${n.method }</td>
 				<td><a href="delete?id=${n.id }">删除</a></td>
+				<td>
+					<c:choose>
+						<c:when test="${n.state }"><a href="update?id=${n.id}&state=false">禁用</a></c:when>
+						<c:otherwise><a href="update?id=${n.id}&state=true">启用</a></c:otherwise>
+					</c:choose>
+				</td>
 			</tr>
 		</c:forEach>
-	
+
 	</table>
+	
+	<a href="generate">生成配置文件</a> 

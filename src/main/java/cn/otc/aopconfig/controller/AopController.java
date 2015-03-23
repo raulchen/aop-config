@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.otc.aopconfig.model.Bean;
 import cn.otc.aopconfig.model.PointType;
+import cn.otc.aopconfig.service.AopDocumentService;
 import cn.otc.aopconfig.service.AopService;
 
 /**
@@ -21,6 +23,9 @@ public class AopController {
 
     @Autowired
     AopService aopService;
+    
+    @Autowired
+    AopDocumentService adService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(Model model) {
@@ -49,5 +54,18 @@ public class AopController {
     public String deleteAop(Long id){
 	aopService.deleteNotice(id);
 	return "redirect:/";
+    }
+    
+    @RequestMapping(value = "update", method = RequestMethod.GET)
+    public String update(Long id, boolean state){
+	aopService.update(id, state);
+	return "redirect:/";
+    }
+    
+    @RequestMapping(value = "generate", method = RequestMethod.GET)
+    @ResponseBody
+    public String generate(){
+	String result = adService.generateSpringAopDocument();
+	return result;
     }
 }
