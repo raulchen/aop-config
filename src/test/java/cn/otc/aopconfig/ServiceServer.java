@@ -7,7 +7,6 @@ import org.springside.modules.test.spring.Profiles;
 /**
  * Jetty Server for Development
  * 
- * @author Chen Hao
  */
 public class ServiceServer {
 

@@ -2,7 +2,18 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="http://www.springframework.org/schema/beans       http://www.springframework.org/schema/beans/spring-beans.xsd      http://www.springframework.org/schema/aop      http://www.springframework.org/schema/aop/spring-aop.xsd">  
   <!--<start id="audience_aspect" /> -->  
-  <aop:config></aop:config>  
+  <aop:config> 
+    <aop:pointcut id="gs(nb)" expression="execution(* cn.otc.aa.bb.test(..)) and args(nb)"/>
+    <aop:pointcut id="2(..))" expression="execution(* cccis.222(..))"/>
+    <aop:pointcut id=".aa.bb.tes" expression="execution(* cn.otc.aa.bb.test(..)) and args(ge)"/>
+    <aop:aspect id="Aspect1" ref="c1">
+      <aop:before pointcut-ref=".aa.bb.tes" method="gege" arg-names="ge"/>
+      <aop:before pointcut-ref="2(..))" method="2t"/>
+    </aop:aspect>
+    <aop:aspect id="Aspect2" ref="c2">
+      <aop:after pointcut-ref="2(..))" method="te"/>
+    </aop:aspect>
+  </aop:config>  
   <bean id="c1" class="cn.otc.aopconfig.Class1"/>
   <bean id="c2" class="cn.otc.aopconfig.Class2"/>
   <bean id="c3" class="cn.otc.aopconfig.Class3"/>

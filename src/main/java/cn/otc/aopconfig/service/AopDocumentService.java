@@ -39,16 +39,18 @@ public class AopDocumentService {
     @Autowired
     private PointcutDao pointcutDao;
 
-    /*
-     * private static final String AOP_FILENAME =
-     * "D:/workspace/xml-demo/src/main/resources/spring-idol.xml";
-     */
+    
+     private static final String AOP_FILENAME =
+     "D:\\文件\\中科院\\项目\\毕设\\new\\cccis\\resources\\spring-aop.xml";
+     
     public String generateSpringAopDocument() {
 
-	Document document = XMLHelper.readXML(getAopFilePath("spring-aop.xml"));
+	//Document document = XMLHelper.readXML(getAopFilePath("spring-aop.xml"));
+    Document document = XMLHelper.readXML(AOP_FILENAME);
 	addBean(document);
 	Element aspectConfig = findElement(document.getRootElement(),
 		"//aop:config", "aop:config");
+    aspectConfig.addAttribute("proxy-target-class", "true");
 	removeAllElements(aspectConfig);
 	addPointcut(document, aspectConfig);
 	List<Aspect> aspects = (List<Aspect>) aspectDao.findAll();
@@ -61,7 +63,7 @@ public class AopDocumentService {
 		aspectConfig.remove(aspectElement);
 	    }
 	}
-	String path = getAopFilePath("spring-idol.xml");
+	String path = AOP_FILENAME;
 	XMLHelper.writeXML(document, path);
 	try {
 	    return FileUtils.readFileToString(new File(path));

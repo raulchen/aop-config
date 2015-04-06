@@ -1,10 +1,6 @@
 package cn.otc.aopconfig.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -13,9 +9,18 @@ public class Pointcut extends IdEntity {
 
     private String shortName;
     private String expression;
+    private String signature;
 
 
-    public String getShortName() {
+    public String getSignature() {
+		return signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+
+	public String getShortName() {
         return shortName;
     }
 

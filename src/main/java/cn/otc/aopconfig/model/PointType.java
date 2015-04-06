@@ -3,8 +3,8 @@ package cn.otc.aopconfig.model;
 
 public enum PointType {
 
-	BEFORE("before"), AFTER("after"), AFTER_THROWING("after_throwing"), ATTER_RETURNING(
-			"after_returning"), AROUND("around");
+	BEFORE("before"), AFTER("after"), AFTER_THROWING("after-throwing"), ATTER_RETURNING(
+			"after-returning"), AROUND("around");
 
 	String name;
 

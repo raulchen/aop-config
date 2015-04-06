@@ -1,0 +1,20 @@
+#methods-container{
+	 word-break:break-all;
+	 overflow-y:scroll;
+	 height: 200px;
+	 border: 1px solid rgb(221,221,221);
+}
+
+#methods li{
+	border-left: 0px;
+	border-right: 0px;
+	border-radius: 0px;
+}
+
+#methods li:first-child{
+	border-top: 0px;
+}
+
+#methods li:last-child{
+	border-bottom: 0px;
+}
